@@ -5,12 +5,12 @@ using UnityEngine;
 public class Banana : MonoBehaviour
 {
     private bool hittedObject;
+    [SerializeField] private float damage;
     void Start()
     {
-        
+        Destroy(gameObject, 10);
     }
 
-   
     void Update()
     {
         if (!hittedObject)
@@ -21,6 +21,12 @@ public class Banana : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (!hittedObject && collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+            Destroy(gameObject);
+        }
+
         hittedObject = true;
     }
 }
