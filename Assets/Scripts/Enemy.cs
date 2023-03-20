@@ -12,13 +12,15 @@ public class Enemy : MonoBehaviour
     protected Slider slider;
     protected NavMeshAgent navMeshAgent;
     protected Transform playerTransform;
+    protected Trees trees;
 
-    public void Start()
+    public void Awake()
     {
         healthBar = GetComponentInChildren<Canvas>().gameObject;
         slider = GetComponentInChildren<Slider>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        trees = FindObjectOfType<Trees>();
 
         currentHealth = maxHealth;
         navMeshAgent.speed = speed;
