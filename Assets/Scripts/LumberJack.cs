@@ -6,11 +6,11 @@ public class LumberJack : Enemy
 {
     private bool playerInRange;
     private bool followPlayer;
-    [SerializeField] private Tree nearestTree;
+    private Tree nearestTree;
 
     void Update()
     {
-        if (!nearestTree)
+        if (!nearestTree && !followPlayer)
         {
             FindNearestTree();
         }
@@ -18,11 +18,6 @@ public class LumberJack : Enemy
         if (followPlayer)
         {
             navMeshAgent.SetDestination(playerTransform.position);
-        }
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            FindNearestTree();
         }
     }
 
@@ -32,7 +27,7 @@ public class LumberJack : Enemy
 
         if (collision.gameObject.tag == "Tree")
         {
-            collision.gameObject.GetComponent<Tree>().CutDown();
+            StartCoroutine(CuttingDownTree(collision.gameObject.GetComponent<Tree>()));
         }
     }
 
@@ -40,9 +35,7 @@ public class LumberJack : Enemy
     {
         if (other.tag == "Player")
         {
-            playerInRange = true;
-            followPlayer = true;
-            Invoke("StillFollowPlayer", 5);
+            FoundPlayer();
         }
     }
 
@@ -83,5 +76,22 @@ public class LumberJack : Enemy
                 nearestTree = null;
             }
         }        
+    }
+
+    private IEnumerator CuttingDownTree(Tree currentTree)
+    {
+        navMeshAgent.isStopped = true;
+        yield return new WaitForSeconds(3);
+        currentTree.CutDown();   
+        navMeshAgent.isStopped = false;
+    }
+
+    private void FoundPlayer()
+    {
+        StopAllCoroutines();
+        playerInRange = true;
+        followPlayer = true;
+        navMeshAgent.isStopped = false;
+        Invoke("StillFollowPlayer", 5);
     }
 }
