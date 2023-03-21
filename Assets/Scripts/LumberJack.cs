@@ -6,22 +6,33 @@ public class LumberJack : Enemy
 {
     private bool playerInRange;
     private bool followPlayer;
-    private Transform nearestTree;
-
-    private void Start()
-    {
-        FindNearestTree();
-    }
+    [SerializeField] private Tree nearestTree;
 
     void Update()
     {
+        if (!nearestTree)
+        {
+            FindNearestTree();
+        }
+
         if (followPlayer)
         {
             navMeshAgent.SetDestination(playerTransform.position);
         }
-        else
+
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            navMeshAgent.SetDestination(nearestTree.position);
+            FindNearestTree();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(" Collsionetner");
+
+        if (collision.gameObject.tag == "Tree")
+        {
+            collision.gameObject.GetComponent<Tree>().CutDown();
         }
     }
 
@@ -67,7 +78,9 @@ public class LumberJack : Enemy
             if (distance < shortestDistance) // Check if the distance is shorter than the current shortest distance
             {
                 shortestDistance = distance;
-                nearestTree = tree.gameObject.transform;
+                nearestTree = tree;
+                navMeshAgent.SetDestination(nearestTree.transform.position);
+                nearestTree = null;
             }
         }        
     }

@@ -8,18 +8,16 @@ public class Tree : MonoBehaviour
     private float elapsedTime = 0.0f;
     private Vector3 originalRotation;
     [SerializeField] Transform anchor;
+    private Trees trees;
     void Start()
     {
         originalRotation = anchor.transform.eulerAngles;
+        trees = FindObjectOfType<Trees>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            CutDown();
-        }
     }
 
     public void CutDown()
@@ -36,7 +34,8 @@ public class Tree : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null; 
         }
-
-        anchor.transform.eulerAngles = originalRotation + new Vector3(0, 90, 0);
+        
+        trees.allTrees.Remove(this);
+        gameObject.SetActive(false);
     }
 }
