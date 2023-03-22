@@ -855,7 +855,7 @@ MonoBehaviour:
   - {fileID: 544836952}
   - {fileID: 1227005388}
   waveSpawnContent:
-  - lumberjackCount: 1
+  - lumberjackCount: 20
     excavatorCount: 0
 --- !u!1 &321039631
 GameObject:
@@ -2942,7 +2942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d336ffec1915dbf4591bd87a5f85393f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allTrees: []
+  activeTrees: []
 --- !u!4 &1674373319
 Transform:
   m_ObjectHideFlags: 0

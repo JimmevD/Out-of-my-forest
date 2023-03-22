@@ -24,7 +24,7 @@ public class Trees : MonoBehaviour
     {
         activeTrees.Remove(tree);
 
-        if (activeTrees.Count <= 10)
+        if (activeTrees.Count == 0)
         {
             Debug.Log("Game over");
         }
@@ -32,7 +32,7 @@ public class Trees : MonoBehaviour
 
     private void Update()
     {
-        if (activeTrees.Count == 0)
+        if (activeTrees.Count <= 5)
         {
             CheckForTrees();
         }
@@ -47,14 +47,6 @@ public class Trees : MonoBehaviour
                 if (!activeTrees.Contains(tree))
                 {
                     activeTrees.Add(tree);
-
-                    for (int i = 0; i < activeTrees.Count; i++)
-                    {
-                        if (!activeTrees[i].gameObject.activeInHierarchy)
-                        {
-                            activeTrees.Remove(activeTrees[i]);
-                        }
-                    }
                 }
             }
         }

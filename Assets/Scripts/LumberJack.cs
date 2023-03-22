@@ -16,6 +16,10 @@ public class LumberJack : Enemy
             {
                 FindNearestTree();
             }
+            else if (nearestTree && !nearestTree.gameObject.activeInHierarchy)
+            {
+                FindNearestTree();
+            }
 
             if (followPlayer)
             {
