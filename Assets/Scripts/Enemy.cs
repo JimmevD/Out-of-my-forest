@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     protected Slider slider;
     protected NavMeshAgent navMeshAgent;
     protected Transform playerTransform;
-    protected Trees trees;
+    public Trees trees;
 
     public void Awake()
     {
@@ -20,11 +20,15 @@ public class Enemy : MonoBehaviour
         slider = GetComponentInChildren<Slider>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        trees = FindObjectOfType<Trees>();
 
         currentHealth = maxHealth;
         navMeshAgent.speed = speed;
         healthBar.SetActive(false);
+    }
+
+    private void LateUpdate()
+    {
+        healthBar.transform.rotation = Quaternion.LookRotation(playerTransform.position - transform.position);
     }
 
     public void TakeDamage(float damage)
