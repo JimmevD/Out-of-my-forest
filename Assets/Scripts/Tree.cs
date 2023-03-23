@@ -8,15 +8,25 @@ public class Tree : MonoBehaviour
     private float elapsedTime = 0.0f;
     private Vector3 originalRotation;
     [SerializeField] Transform anchor;
+    [SerializeField] private GameObject branches;
+    public Transform[] branch;
     void Start()
     {
         originalRotation = anchor.transform.eulerAngles;
+
+        branch = new Transform[branches.transform.childCount];
+
+        for (int i = 0; i < branches.transform.childCount; i++)
+        {
+           branch[i] = branches.transform.GetChild(i).gameObject.transform;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
     }
+
 
     public void CutDown()
     {

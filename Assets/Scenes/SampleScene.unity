@@ -417,7 +417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152106622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 44.61, z: 0}
+  m_LocalPosition: {x: -30.73, y: 50.72, z: 16.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -447,7 +447,10 @@ MonoBehaviour:
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 72
+  branchMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!54 &152106626
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -855,7 +858,7 @@ MonoBehaviour:
   - {fileID: 544836952}
   - {fileID: 1227005388}
   waveSpawnContent:
-  - lumberjackCount: 20
+  - lumberjackCount: 1
     excavatorCount: 0
 --- !u!1 &321039631
 GameObject:
@@ -1459,6 +1462,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2399711716262335404, guid: 24c1d1390efada04d8168e485397fbb3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2399711716262335405, guid: 24c1d1390efada04d8168e485397fbb3, type: 3}
+      propertyPath: branch.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2399711716262335410, guid: 24c1d1390efada04d8168e485397fbb3, type: 3}

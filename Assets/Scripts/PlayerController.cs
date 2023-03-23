@@ -5,21 +5,49 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private CharacterController controller;
+    private bool isOnbranch;
 
     [SerializeField] private float speed = 12f;
+    private float branchSpeed;
+    private float groundSpeed;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 1f;
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
+    [SerializeField] private LayerMask branchMask;
+    private Tree currentClimbTree;
 
     private Vector3 velocity;
     private bool isGrounded;
 
+    private void Start()
+    {
+        branchSpeed = speed * 2;
+        groundSpeed = speed;
+    }
+
     void Update()
     {
-       isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        if (currentClimbTree && Input.GetButtonDown("Jump"))
+        {
+            ClimbTree();
+        }
+
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isOnbranch = Physics.CheckSphere(groundCheck.position, groundDistance, branchMask);
+
+        if (isGrounded)
+        {
+            speed = groundSpeed;
+        }
+
+        if (isOnbranch)
+        {
+            speed = branchSpeed;
+        }
+
 
         if (isGrounded && velocity.y < 0)
         {
@@ -42,4 +70,42 @@ public class PlayerController : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Tree")
+        {
+            currentClimbTree = other.gameObject.GetComponent<Tree>();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == currentClimbTree.gameObject)
+        {
+            currentClimbTree = null;
+        }
+    }
+
+    private void ClimbTree()
+    {
+        Transform shortestBranch = null;
+        float shortestDistance = Mathf.Infinity;
+        
+        for (int i = 0; i < currentClimbTree.branch.Length; i++)
+        {
+            if (Vector3.Distance(transform.position, currentClimbTree.branch[i].position) < shortestDistance)
+            {
+                shortestBranch = currentClimbTree.branch[i];
+                shortestDistance = Vector3.Distance(transform.position, currentClimbTree.branch[i].position);
+            }
+
+        }
+
+        controller.enabled = false;
+        transform.position = new Vector3(shortestBranch.position.x, shortestBranch.position.y + 1, shortestBranch.position.z);
+        currentClimbTree = null;
+        controller.enabled = true;
+    }
+
 }
