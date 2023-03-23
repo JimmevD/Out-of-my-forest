@@ -89,12 +89,13 @@ public class PlayerController : MonoBehaviour
         {
             currentClimbTree = null;
             currentClimbTree = other.gameObject.GetComponent<Tree>();
+            Debug.Log(" ETT" + currentClimbTree);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == currentClimbTree.gameObject && !currentClimbTree)
+        if (other.gameObject == currentClimbTree.gameObject)
         {
             currentClimbTree = null;
         }
@@ -116,7 +117,7 @@ public class PlayerController : MonoBehaviour
         }
 
         controller.enabled = false;
-        transform.position = new Vector3(shortestBranch.position.x, shortestBranch.position.y + 1, shortestBranch.position.z);
+        transform.position = new Vector3(shortestBranch.position.x, shortestBranch.position.y + 0.5f, shortestBranch.position.z);
         currentClimbTree = null;
         controller.enabled = true;
     }

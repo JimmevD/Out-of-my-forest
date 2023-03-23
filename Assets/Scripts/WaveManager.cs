@@ -10,7 +10,8 @@ public class WaveManager : MonoBehaviour
     private float timeBetweenWaves;
     private bool countDownToNextWave;
     [SerializeField] TextMeshProUGUI waveCounter; 
-    [SerializeField] TextMeshProUGUI enemiesCounter; 
+    [SerializeField] TextMeshProUGUI enemiesCounter;
+    [SerializeField] TextMeshProUGUI skipWaitTime; 
     private Trees trees;
     [SerializeField] private GameObject lumberjacks;
     [SerializeField] private GameObject excavators;
@@ -28,26 +29,32 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             StartCoroutine(SpawnNewWaves());
         }
 
         if (countDownToNextWave)
         {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                timeBetweenWaves = 0.1f;
+            }
+
             timeBetweenWaves -= Time.deltaTime;
             enemiesCounter.text = timeBetweenWaves.ToString("F0");
 
             if (timeBetweenWaves < 0)
             {
                 countDownToNextWave = false;
-                SpawnNewWaves();
+                StartCoroutine(SpawnNewWaves());
             }
         }  
     }
 
     private IEnumerator SpawnNewWaves()
     {
+        skipWaitTime.enabled = false;
         trees.RemoveHologramTrees();
        
         for (int i = 0; i < waveSpawnContent[currentWave].lumberjackCount; i++)
@@ -55,7 +62,7 @@ public class WaveManager : MonoBehaviour
             GameObject go = Instantiate(lumberjacks, randomSpawnPosistions[Random.Range(0, randomSpawnPosistions.Length)].position, Quaternion.identity);
             go.GetComponent<Enemy>().trees = trees;
             go.GetComponent<Enemy>().waveManager = this;
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.05f);
         }
 
         for (int i = 0; i < waveSpawnContent[currentWave].excavatorCount; i++)
@@ -63,7 +70,7 @@ public class WaveManager : MonoBehaviour
             GameObject go = Instantiate(excavators, randomSpawnPosistions[Random.Range(0, randomSpawnPosistions.Length)].position, Quaternion.identity);
             go.GetComponent<Enemy>().trees = trees;
             go.GetComponent<Enemy>().waveManager = this;
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.05f);
         }
 
         enemiesCounter.enabled = true;
@@ -77,17 +84,17 @@ public class WaveManager : MonoBehaviour
     public void KilledEnemy()
     {
         totalEnemies--;
+        enemiesCounter.text = "Enemies Remaining: " + totalEnemies.ToString();
 
         if (totalEnemies == 0)
         {
             trees.SpawnHoloGram();
             waveCounter.text = "PREPAIR FOR NEXT WAVE";
+            skipWaitTime.enabled = true;
             countDownToNextWave = true;
             timeBetweenWaves = 30;
         }
     }
-
-
 
     [System.Serializable]
     public struct WaveSpawnContent
