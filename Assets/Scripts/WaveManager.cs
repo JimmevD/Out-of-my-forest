@@ -43,13 +43,13 @@ public class WaveManager : MonoBehaviour
                 countDownToNextWave = false;
                 SpawnNewWaves();
             }
-        }
-
-       
+        }  
     }
 
     private IEnumerator SpawnNewWaves()
     {
+        trees.RemoveHologramTrees();
+       
         for (int i = 0; i < waveSpawnContent[currentWave].lumberjackCount; i++)
         {
             GameObject go = Instantiate(lumberjacks, randomSpawnPosistions[Random.Range(0, randomSpawnPosistions.Length)].position, Quaternion.identity);
@@ -69,6 +69,7 @@ public class WaveManager : MonoBehaviour
         enemiesCounter.enabled = true;
         totalEnemies = waveSpawnContent[currentWave].lumberjackCount + waveSpawnContent[currentWave].excavatorCount;
         enemiesCounter.text = "Enemies Remaining: " + totalEnemies.ToString();
+        
         currentWave++;
         waveCounter.text = "Wave: " + currentWave.ToString();
     }

@@ -6,6 +6,8 @@ public class Trees : MonoBehaviour
 {
     public List<Tree> activeTrees = new List<Tree>();
     private List<Tree> allTrees = new List<Tree>();
+    private List<GameObject> holograms = new List<GameObject>();
+    private PlayerController playerController;
 
     [SerializeField] private GameObject hologramTree;
     void Start()
@@ -20,6 +22,8 @@ public class Trees : MonoBehaviour
                 allTrees.Add(tree);
             }
         }
+
+        playerController = FindObjectOfType<PlayerController>();
     }
 
     public void RemoveFromlist(Tree tree)
@@ -61,8 +65,20 @@ public class Trees : MonoBehaviour
             if (!tree.gameObject.activeInHierarchy)
             {
                 GameObject holo = Instantiate(hologramTree, tree.transform.position, Quaternion.identity);
+                holograms.Add(holo);
                 holo.GetComponent<HologramTree>().tree = tree.gameObject.GetComponent<Tree>();
+                holo.GetComponent<HologramTree>().interactText = playerController.interactText;
             }
         }
+    }
+
+    public void RemoveHologramTrees()
+    {
+        for (int i = 0; i < holograms.Count; i++)
+        {
+            Destroy(holograms[i]);
+        }
+
+        holograms.Clear();
     }
 }

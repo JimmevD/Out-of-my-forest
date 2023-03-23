@@ -1,22 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class HologramTree : MonoBehaviour
 {
     public Tree tree;
     private GameObject player;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    public TextMeshProUGUI interactText;
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && player)
         {
             tree.ResetTree();
+            player = null;
+            interactText.enabled = false;
             Destroy(gameObject);
         }
     }
@@ -26,6 +23,8 @@ public class HologramTree : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             player = other.gameObject;
+            interactText.text = "Press 'E' to plant Tree";
+            interactText.enabled = true;
         }
     }
 
@@ -34,6 +33,7 @@ public class HologramTree : MonoBehaviour
         if (other.gameObject == player)
         {
             player = null;
+            interactText.enabled = false;
         }
     }
 }

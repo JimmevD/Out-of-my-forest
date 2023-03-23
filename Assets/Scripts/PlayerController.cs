@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private Tree currentClimbTree;
     private float coyoteJumpTimer;
 
+    public TextMeshProUGUI interactText;
+
     private Vector3 velocity;
     private bool isGrounded;
 
@@ -29,6 +32,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         branchSpeed = speed * 2;
         groundSpeed = speed;
+        interactText.enabled = false;
     }
 
     void Update()
@@ -90,7 +94,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == currentClimbTree.gameObject)
+        if (other.gameObject == currentClimbTree.gameObject && !currentClimbTree)
         {
             currentClimbTree = null;
         }
