@@ -4,26 +4,29 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private CharacterController controller;
-    private bool isOnbranch;
+    private CharacterController controller;
 
     [SerializeField] private float speed = 12f;
     private float branchSpeed;
     private float groundSpeed;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 1f;
+    [SerializeField] private float coyoteJumpTime;
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private LayerMask branchMask;
+    private bool isOnbranch;
     private Tree currentClimbTree;
+    private float coyoteJumpTimer;
 
     private Vector3 velocity;
     private bool isGrounded;
 
     private void Start()
     {
+        controller = GetComponent<CharacterController>();
         branchSpeed = speed * 2;
         groundSpeed = speed;
     }
@@ -41,6 +44,11 @@ public class PlayerController : MonoBehaviour
         if (isGrounded)
         {
             speed = groundSpeed;
+            coyoteJumpTimer = coyoteJumpTime;
+        }
+        else
+        {
+            coyoteJumpTimer -= Time.deltaTime;
         }
 
         if (isOnbranch)
@@ -61,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
         controller.Move(move * speed * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && coyoteJumpTimer > 0f)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
@@ -75,6 +83,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Tree")
         {
+            currentClimbTree = null;
             currentClimbTree = other.gameObject.GetComponent<Tree>();
         }
     }
@@ -107,5 +116,4 @@ public class PlayerController : MonoBehaviour
         currentClimbTree = null;
         controller.enabled = true;
     }
-
 }

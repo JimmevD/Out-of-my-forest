@@ -7,12 +7,11 @@ public class Tree : MonoBehaviour
     private float duration = 1.0f;
     private float elapsedTime = 0.0f;
     private Vector3 originalRotation;
-    [SerializeField] Transform anchor;
     [SerializeField] private GameObject branches;
     public Transform[] branch;
     void Start()
     {
-        originalRotation = anchor.transform.eulerAngles;
+        originalRotation = transform.eulerAngles;
 
         branch = new Transform[branches.transform.childCount];
 
@@ -41,11 +40,17 @@ public class Tree : MonoBehaviour
         while (elapsedTime < duration)
         {
             float angle = Mathf.Lerp(0, 90, elapsedTime / duration);
-            anchor.transform.eulerAngles = originalRotation + new Vector3(angle, 0, 0); 
+            transform.eulerAngles = originalRotation + new Vector3(angle, 0, 0); 
             elapsedTime += Time.deltaTime;
             yield return null; 
         }
 
         gameObject.SetActive(false);
+    }
+
+    public void ResetTree()
+    {
+        gameObject.SetActive(true);
+        transform.eulerAngles = originalRotation + new Vector3(originalRotation.x, 0, 0);
     }
 }

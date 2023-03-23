@@ -6,6 +6,8 @@ public class Trees : MonoBehaviour
 {
     public List<Tree> activeTrees = new List<Tree>();
     private List<Tree> allTrees = new List<Tree>();
+
+    [SerializeField] private GameObject hologramTree;
     void Start()
     {        
         Tree[] currentTree = FindObjectsOfType<Tree>();
@@ -48,6 +50,18 @@ public class Trees : MonoBehaviour
                 {
                     activeTrees.Add(tree);
                 }
+            }
+        }
+    }
+
+    public void SpawnHoloGram()
+    {
+        foreach (Tree tree in allTrees)
+        {
+            if (!tree.gameObject.activeInHierarchy)
+            {
+                GameObject holo = Instantiate(hologramTree, tree.transform.position, Quaternion.identity);
+                holo.GetComponent<HologramTree>().tree = tree.gameObject.GetComponent<Tree>();
             }
         }
     }

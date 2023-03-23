@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     protected NavMeshAgent navMeshAgent;
     protected Transform playerTransform;
     public Trees trees;
+    public WaveManager waveManager;
 
     public void Awake()
     {
@@ -49,6 +50,7 @@ public class Enemy : MonoBehaviour
 
     public void Death()
     {
+        waveManager.KilledEnemy();
         Destroy(this.gameObject);
     }
 }
