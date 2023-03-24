@@ -5,7 +5,10 @@ using UnityEngine;
 public class Banana : MonoBehaviour
 {
     private bool hittedObject;
-    [SerializeField] private float damage;
+    public float damage;
+
+    [SerializeField] MeshCollider meshCollider;
+    [SerializeField] BoxCollider boxCollider;
     void Start()
     {
         Destroy(gameObject, 10);
@@ -25,8 +28,11 @@ public class Banana : MonoBehaviour
         {
             collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
             Destroy(gameObject);
+            Debug.Log("Hitted for " + damage);
         }
 
+        boxCollider.enabled = false;
+        meshCollider.enabled = true;
         hittedObject = true;
     }
 }
