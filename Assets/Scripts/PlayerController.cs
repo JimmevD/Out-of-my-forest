@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && coyoteJumpTimer > 0f)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            coyoteJumpTimer = 0;
         }
 
         velocity.y += gravity * Time.deltaTime;
@@ -89,7 +90,6 @@ public class PlayerController : MonoBehaviour
         {
             currentClimbTree = null;
             currentClimbTree = other.gameObject.GetComponent<Tree>();
-            Debug.Log(" ETT" + currentClimbTree);
         }
     }
 
