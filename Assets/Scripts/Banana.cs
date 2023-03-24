@@ -28,9 +28,9 @@ public class Banana : MonoBehaviour
         {
             collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
             Destroy(gameObject);
-            Debug.Log("Hitted for " + damage);
         }
-
+        if (!hittedObject)
+        Debug.Log(collision.gameObject.name);
         boxCollider.enabled = false;
         meshCollider.enabled = true;
         hittedObject = true;

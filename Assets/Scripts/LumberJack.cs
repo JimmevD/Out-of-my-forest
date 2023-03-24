@@ -6,7 +6,6 @@ public class LumberJack : Enemy
 {
     private bool playerInRange;
     private bool followPlayer;
-    public Tree nearestTree;
 
     void Update()
     {
@@ -65,35 +64,13 @@ public class LumberJack : Enemy
         }
     }
 
-    private void FindNearestTree()
-    {     
-        float shortestDistance = Mathf.Infinity;
-
-        foreach (Tree tree in trees.activeTrees)
-        {
-            float distance = Vector3.Distance(transform.position, tree.transform.position); // Calculate the distance to the object
-
-            if (distance < shortestDistance) // Check if the distance is shorter than the current shortest distance
-            {
-                shortestDistance = distance;
-                nearestTree = tree;   
-                navMeshAgent.SetDestination(nearestTree.transform.position);
-            }
-        }
-        
-        trees.activeTrees.Remove(nearestTree);
-    }
-
     private IEnumerator CuttingDownTree(Tree currentTree)
     {
         navMeshAgent.isStopped = true;
         yield return new WaitForSeconds(3);
 
-
-
         currentTree.CutDown();
         nearestTree = null;
-
 
         navMeshAgent.isStopped = false;
     }

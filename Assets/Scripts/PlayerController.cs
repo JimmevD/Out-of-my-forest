@@ -99,6 +99,10 @@ public class PlayerController : MonoBehaviour
         {
             currentClimbTree = null;
         }
+        else
+        {
+            Debug.Log("Error: " + other.gameObject.name + " current object should be " + currentClimbTree);
+        }
     }
 
     private void ClimbTree()

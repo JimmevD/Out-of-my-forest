@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 64757384}
   - component: {fileID: 64757386}
   - component: {fileID: 64757385}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Enemies Remaining
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 124330817}
   - component: {fileID: 124330819}
   - component: {fileID: 124330818}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: BananaImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +507,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -102, y: 61.800003}
+  m_AnchoredPosition: {x: -102, y: 61.80002}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &124330818
@@ -686,7 +686,7 @@ GameObject:
   - component: {fileID: 152106626}
   - component: {fileID: 152106627}
   - component: {fileID: 152106628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1176,7 +1176,7 @@ MonoBehaviour:
   enemiesCounter: {fileID: 64757385}
   skipWaitTime: {fileID: 924527197}
   lumberjacks: {fileID: 936125397053086770, guid: be9759c95949cd34cbd1f780237d1794, type: 3}
-  excavators: {fileID: 936125397053086770, guid: be9759c95949cd34cbd1f780237d1794, type: 3}
+  excavators: {fileID: 5872227228421613031, guid: 433f345836c29734ea9028b445bdb6c7, type: 3}
   randomSpawnPosistions:
   - {fileID: 2145224970}
   - {fileID: 321039632}
@@ -1189,8 +1189,14 @@ MonoBehaviour:
     excavatorCount: 0
   - lumberjackCount: 3
     excavatorCount: 0
-  - lumberjackCount: 5
-    excavatorCount: 0
+  - lumberjackCount: 3
+    excavatorCount: 1
+  - lumberjackCount: 4
+    excavatorCount: 2
+  - lumberjackCount: 6
+    excavatorCount: 2
+  - lumberjackCount: 8
+    excavatorCount: 3
 --- !u!1 &265524372
 GameObject:
   m_ObjectHideFlags: 0
@@ -1571,7 +1577,7 @@ GameObject:
   - component: {fileID: 414950607}
   - component: {fileID: 414950609}
   - component: {fileID: 414950608}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: BananaCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1595,7 +1601,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -114, y: 62.699997}
+  m_AnchoredPosition: {x: -114, y: 62.69998}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &414950608
@@ -1887,7 +1893,7 @@ GameObject:
   - component: {fileID: 478686357}
   - component: {fileID: 478686359}
   - component: {fileID: 478686358}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2291,7 +2297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 639385910}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2324,7 +2330,7 @@ GameObject:
   - component: {fileID: 669119763}
   - component: {fileID: 669119765}
   - component: {fileID: 669119764}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: InteractText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2460,7 +2466,7 @@ GameObject:
   - component: {fileID: 674599400}
   - component: {fileID: 674599399}
   - component: {fileID: 674599398}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2546,7 +2552,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 963194227}
-  m_PlaneDistance: 1
+  m_PlaneDistance: 0.31
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -2659,7 +2665,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 727093781}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2743,7 +2749,7 @@ GameObject:
   - component: {fileID: 808014108}
   - component: {fileID: 808014110}
   - component: {fileID: 808014109}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2819,7 +2825,7 @@ GameObject:
   - component: {fileID: 808286713}
   - component: {fileID: 808286716}
   - component: {fileID: 808286715}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2907,7 +2913,7 @@ GameObject:
   - component: {fileID: 841420818}
   - component: {fileID: 841420820}
   - component: {fileID: 841420819}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Wave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3161,7 +3167,7 @@ GameObject:
   - component: {fileID: 924527196}
   - component: {fileID: 924527198}
   - component: {fileID: 924527197}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: SkipWaveText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3297,7 +3303,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -3545,7 +3551,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1148147796}
   - component: {fileID: 1148147795}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3975,7 +3981,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1367086063}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4013,7 +4019,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1384855610}
   - component: {fileID: 1384855611}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4420,7 +4426,7 @@ GameObject:
   - component: {fileID: 1576319263}
   - component: {fileID: 1576319265}
   - component: {fileID: 1576319264}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4494,7 +4500,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1641121981}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ThrowPosistion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4509,7 +4515,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641121980}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.329, y: -0.427, z: 0.813}
+  m_LocalPosition: {x: 0.329, y: -0.427, z: 0.863}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5198,7 +5204,7 @@ GameObject:
   - component: {fileID: 2078693231}
   - component: {fileID: 2078693233}
   - component: {fileID: 2078693232}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5467,7 +5473,7 @@ GameObject:
   - component: {fileID: 8384322056756283899}
   - component: {fileID: 8384322056757381947}
   - component: {fileID: 737834495267285388}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: VisualBanana
   m_TagString: Untagged
   m_Icon: {fileID: 0}

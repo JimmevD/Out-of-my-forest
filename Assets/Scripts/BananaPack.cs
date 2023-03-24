@@ -8,8 +8,13 @@ public class BananaPack : MonoBehaviour
     private TextMeshProUGUI interactText;
     private bool pickedUp;
     private float respawnTimer;
-   
-    void Update()
+    private Collider colliderTrigger;
+
+    private void Start()
+    {
+        colliderTrigger = GetComponent<Collider>();
+    }
+    private void Update()
     {
         if (player && Input.GetKeyDown(KeyCode.E))
         {
@@ -19,11 +24,12 @@ public class BananaPack : MonoBehaviour
         if (pickedUp)
         {
             respawnTimer -= Time.deltaTime;
-
+            
             if (respawnTimer <= 0)
             {
                 pickedUp = false;
-                gameObject.SetActive(true);
+
+                ChangeState(true);
             }
         }
     }
@@ -60,6 +66,16 @@ public class BananaPack : MonoBehaviour
         respawnTimer = 20;
         interactText.enabled = false;
         player = null;
-        gameObject.SetActive(false);
+        ChangeState(false);   
+    }
+
+    private void ChangeState(bool active)
+    {
+        colliderTrigger.enabled = active;
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(active);
+        }
     }
 }
