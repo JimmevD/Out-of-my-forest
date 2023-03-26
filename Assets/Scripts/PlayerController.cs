@@ -90,6 +90,8 @@ public class PlayerController : MonoBehaviour
         {
             currentClimbTree = null;
             currentClimbTree = other.gameObject.GetComponent<Tree>();
+            interactText.enabled = true;
+            interactText.text = "Press 'Space' to climb tree";
         }
     }
 
@@ -98,6 +100,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject == currentClimbTree.gameObject)
         {
             currentClimbTree = null;
+            interactText.enabled = false;
         }
         else
         {
@@ -119,7 +122,8 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-
+        
+        interactText.enabled = false;
         controller.enabled = false;
         transform.position = new Vector3(shortestBranch.position.x, shortestBranch.position.y + 0.5f, shortestBranch.position.z);
         currentClimbTree = null;
