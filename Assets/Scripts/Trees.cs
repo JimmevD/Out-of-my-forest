@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Trees : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Trees : MonoBehaviour
     private PlayerController playerController;
 
     [SerializeField] private GameObject hologramTree;
+    [SerializeField] private Camera endCamera;
     void Start()
     {        
         Tree[] currentTree = FindObjectsOfType<Tree>();
@@ -32,7 +34,7 @@ public class Trees : MonoBehaviour
 
         if (activeTrees.Count == 0)
         {
-            Debug.Log("Game over");
+            EndScreen.EndScenario(false);
         }
     }
 
@@ -41,6 +43,11 @@ public class Trees : MonoBehaviour
         if (activeTrees.Count <= 5)
         {
             CheckForTrees();
+        }
+
+        if (activeTrees.Count == 0)
+        {
+            EndScreen.EndScenario(false);
         }
     }
 
@@ -80,5 +87,16 @@ public class Trees : MonoBehaviour
         }
 
         holograms.Clear();
+    }
+
+    public void ResetAllTrees()
+    {
+        for (int i = 0; i < allTrees.Count; i++)
+        {
+            if (!allTrees[i].gameObject)
+            {
+                allTrees[i].ResetTree();
+            }
+        }
     }
 }

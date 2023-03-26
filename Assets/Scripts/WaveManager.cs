@@ -9,6 +9,8 @@ public class WaveManager : MonoBehaviour
     private int totalEnemies;
     private float timeBetweenWaves;
     private bool countDownToNextWave;
+    private float timeUntilBegin;
+    private bool isBeginning;
     [SerializeField] TextMeshProUGUI waveCounter; 
     [SerializeField] TextMeshProUGUI enemiesCounter;
     [SerializeField] TextMeshProUGUI skipWaitTime; 
@@ -23,15 +25,24 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         trees = FindObjectOfType<Trees>();
-        waveCounter.text = "Starting";
-        enemiesCounter.enabled = false;
+
+        isBeginning = true;
+        waveCounter.text = "Starting in";
+        timeUntilBegin = 10;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (isBeginning)
         {
-            StartCoroutine(SpawnNewWaves());
+            timeUntilBegin -= Time.deltaTime;
+            enemiesCounter.text = timeUntilBegin.ToString("F0");
+
+            if (timeUntilBegin < 0)
+            {
+                StartCoroutine(SpawnNewWaves());
+                isBeginning = false;
+            }
         }
 
         if (countDownToNextWave)
@@ -79,6 +90,11 @@ public class WaveManager : MonoBehaviour
         
         currentWave++;
         waveCounter.text = "Wave: " + currentWave.ToString();
+
+        if (currentWave == waveSpawnContent.Length)
+        {
+            waveCounter.text = "Last Wave";
+        }
     }
 
     public void KilledEnemy()
@@ -88,6 +104,12 @@ public class WaveManager : MonoBehaviour
 
         if (totalEnemies == 0)
         {
+            if (currentWave == waveSpawnContent.Length)
+            {
+                EndScreen.EndScenario(true);
+                return;
+            }
+
             trees.SpawnHoloGram();
             waveCounter.text = "PREPAIR FOR NEXT WAVE";
             skipWaitTime.enabled = true;

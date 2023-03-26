@@ -31,7 +31,13 @@ public class LumberJack : Enemy
     {
         if (collision.gameObject.tag == "Tree" && nearestTree == collision.gameObject.GetComponent<Tree>())
         {
+            Debug.Log("hitted Tree");
             StartCoroutine(CuttingDownTree(collision.gameObject.GetComponent<Tree>()));
+        }
+
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(34);
         }
     }
 

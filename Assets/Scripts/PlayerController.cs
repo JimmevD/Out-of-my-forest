@@ -5,7 +5,7 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
-    private CharacterController controller;
+    public CharacterController controller;
 
     [SerializeField] private float speed = 12f;
     private float branchSpeed;

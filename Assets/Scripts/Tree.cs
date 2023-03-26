@@ -47,5 +47,5 @@ public class Tree : MonoBehaviour
         gameObject.SetActive(true);
         transform.eulerAngles = originalRotation + new Vector3(originalRotation.x, 0, 0);
         elapsedTime = 0;
-}
+    }
 }
