@@ -9,9 +9,13 @@ public class Tree : MonoBehaviour
     private Vector3 originalRotation;
     [SerializeField] private GameObject branches;
     public Transform[] branch;
+    [HideInInspector] public Trees trees;
+    [SerializeField] private Light directionalLight;
     void Start()
     {
         originalRotation = transform.eulerAngles;
+
+        directionalLight = FindObjectOfType<Light>();
 
         branch = new Transform[branches.transform.childCount];
 
@@ -39,12 +43,14 @@ public class Tree : MonoBehaviour
             yield return null; 
         }
 
+        trees.ChangeIntensity(true);
         gameObject.SetActive(false);
     }
 
     public void ResetTree()
     {
         gameObject.SetActive(true);
+        trees.ChangeIntensity(false);
         transform.eulerAngles = originalRotation + new Vector3(originalRotation.x, 0, 0);
         elapsedTime = 0;
     }

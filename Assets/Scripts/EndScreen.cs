@@ -7,14 +7,14 @@ public static class EndScreen
     {
         Cursor.lockState = CursorLockMode.None;
         GameObject.Find("EndCamera").GetComponent<Camera>().enabled = true;
-        
+
         if (goodEnding)
         {
-            GameObject.Find("GoodText").GetComponent<TextMeshProUGUI>().enabled = true;
+            GameObject.Find("Endings").transform.GetChild(0).gameObject.SetActive(true);
         }
         else
         {
-            GameObject.Find("BadText").GetComponent<TextMeshProUGUI>().enabled = true;
+            GameObject.Find("Endings").transform.GetChild(1).gameObject.SetActive(true);
         }
     }
 }

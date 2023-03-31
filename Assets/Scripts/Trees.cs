@@ -9,6 +9,8 @@ public class Trees : MonoBehaviour
     private List<Tree> allTrees = new List<Tree>();
     private List<GameObject> holograms = new List<GameObject>();
     private PlayerController playerController;
+    private Light directionalLight;
+    private float currentIntensity = 1;
 
     [SerializeField] private GameObject hologramTree;
     [SerializeField] private Camera endCamera;
@@ -22,9 +24,11 @@ public class Trees : MonoBehaviour
             {
                 activeTrees.Add(tree);
                 allTrees.Add(tree);
+                tree.trees = this;
             }
         }
 
+        directionalLight = FindObjectOfType<Light>();
         playerController = FindObjectOfType<PlayerController>();
     }
 
@@ -98,5 +102,17 @@ public class Trees : MonoBehaviour
                 allTrees[i].ResetTree();
             }
         }
+    }
+
+    public void ChangeIntensity(bool addIntensity)
+    {
+        if (addIntensity)
+        {
+            directionalLight.intensity += 0.025f;
+        }
+        else
+        {
+            directionalLight.intensity -= 0.025f;
+        }    
     }
 }

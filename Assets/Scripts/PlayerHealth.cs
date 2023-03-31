@@ -21,7 +21,6 @@ public class PlayerHealth : MonoBehaviour
         {
             EndScreen.EndScenario(false);
             gameObject.SetActive(false);
-            Time.timeScale = 20;
         }
     }
 }
